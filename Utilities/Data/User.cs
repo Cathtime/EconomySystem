@@ -1,9 +1,9 @@
 namespace EconomySystem.Utilities.Data
 {
-    public class User(string name)
+    public class User(string name, int balance)
     {
         public string Name { get; set; } = name;
-        private int Balance {get; set;} = 0;
+        private int Balance {get; set;} = balance;
 
         public int GetBalance()
         {

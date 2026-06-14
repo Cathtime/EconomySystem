@@ -12,14 +12,14 @@ namespace EconomySystem
 
     class Program
     {
-        static string Name = "";
-        static int option = 0;
+       // static string Name = "";
+        static int option = 0;        
        async static Task Main()
         {
+            // load the env
             Env.Load();
 
-            Console.WriteLine($"HOST: [{Env.GetString("Host")}]");
-
+            // connect to the DB
             string connectionString =
                 $"Host={Env.GetString("Host")};" +
                 $"Port={Env.GetString("Port")};" +
@@ -33,41 +33,27 @@ namespace EconomySystem
 
             Console.WriteLine("Connected!");
 
-            // Made a method because having like a million while loops for inputs would get wonky
-            Name = GetUserInput(
-                "Please enter your name: ",
-                "Enter a valid Name: "
-            );
-
-            User user = new(Name);
-
-            // this is for int validation
+            // prompt user to login or create new account
             do
             {
-                // this is for string validation
                 option = int.Parse(GetUserInput(
-                "Please enter options 1-3 ",
-                "Please enter options 1-3 "
+                "1. Login. 2. New account ",
+                "1. Login. 2. New account "
             ));
-            } while(option > 3 || option <= 0);
+            } while(option > 2 || option <= 0);
 
-            switch (option)
+            User? currentUser = null;
+            do {
+                
+            currentUser = option switch
             {
-                case 1:
-                    {
-                        break;
-                    }
-                case 2:
-                    {
-                        break;
-                    }
-                case 3:
-                        break;
-                default:
-                    {
-                        break;
-                    }
-            }
+                1 => await UserRepo.FindUser(connection),
+                2 => await UserRepo.CreateUser(connection),
+                _ => null };
+   
+            } while(currentUser == null);
+
+
         }
         
     }
