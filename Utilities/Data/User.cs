@@ -5,6 +5,18 @@ namespace EconomySystem.Utilities.Data
         public string Name { get; set; } = name;
         private int Balance {get; set;} = balance;
 
+        private DateTime workCooldown;
+
+        public DateTime GetWorkCooldown()
+        {
+            return workCooldown;
+        }
+
+        public void SetCooldown(DateTime time)
+        {
+            workCooldown = time;
+        }
+
         public int GetBalance()
         {
             return Balance;

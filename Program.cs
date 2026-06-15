@@ -2,6 +2,7 @@
 using EconomySystem.Utilities.Data;
 using Npgsql;
 using DotNetEnv;
+using EconomySystem.Utilities.Commands;
 
 
 namespace EconomySystem
@@ -53,6 +54,8 @@ namespace EconomySystem
    
             } while(currentUser == null);
 
+            WorkCommands.Work(currentUser);
+            WorkCommands.Work(currentUser);
 
         }
         
